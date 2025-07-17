@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .success {
+            color: #28a745;
+        }
+        
+        .error {
+            color: #dc3545;
+        }
+        
+        .result-box {
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .error-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .error-list {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .error-list li {
+            margin: 5px 0;
+        }
+        
+        .extracted-text {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: #0056b3;
+        }
+        
+        .icon {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if is_valid %}
+            <div class="icon">✅</div>
+            <h1 class="success">Payment Verified Successfully!</h1>
+            <div class="result-box success-box">
+                <strong>Congratulations!</strong> Your payment screenshot has been verified and is valid. 
+                Your transaction meets all the required criteria.
+            </div>
+        {% else %}
+            <div class="icon">❌</div>
+            <h1 class="error">Payment Verification Failed</h1>
+            <div class="result-box error-box">
+                <strong>Verification Failed:</strong> Your payment screenshot does not meet the required criteria.
+                <ul class="error-list">
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        <h3>Extracted Text from Screenshot:</h3>
+        <div class="extracted-text">{{ extracted_text }}</div>
+        
+        <div style="text-align: center;">
+            {% if redirect_url %}
+                <a href="{{ redirect_url }}" class="back-btn">🔙 Return to Main Website</a>
+                <a href="/" class="back-btn" style="background: #6c757d; margin-left: 10px;">🔄 Upload Another Screenshot</a>
+            {% else %}
+                <a href="/" class="back-btn">🔄 Upload Another Screenshot</a>
+            {% endif %}
+            <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; color: #856404;">
+                <strong>📞 Need Help or Have Questions?</strong><br>
+                Contact us on Telegram: <strong>@smarexam</strong>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
